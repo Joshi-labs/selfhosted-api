@@ -48,6 +48,7 @@ jobs:
           sudo mv kubectl /usr/local/bin/kubectl
           kubectl version --client
 
+
       - name: Configure kubeconfig
         run: |
           mkdir -p ~/.kube
