@@ -1,3 +1,8 @@
+import dns from "dns";
+
+dns.setServers(["1.1.1.1","8.8.8.8"]);
+dns.setDefaultResultOrder("ipv4first");
+
 import express from "express";
 import corsMiddleware from "./middleware/cors.js";
 import rateLimiter from "./middleware/rateLimiter.js";
@@ -5,6 +10,8 @@ import rateLimiter from "./middleware/rateLimiter.js";
 import portfolioRoutes from "./routes/portfolio.routes.js";
 import xyzRoutes from "./routes/xyz.routes.js";
 import healthRoutes from "./routes/health.routes.js";
+
+
 
 import dotenv from "dotenv";
 dotenv.config();

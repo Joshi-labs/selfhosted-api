@@ -1,6 +1,4 @@
-FROM node:20-alpine
-
-RUN apk add --no-cache ca-certificates
+FROM node:20-slim
 
 WORKDIR /app
 
@@ -10,5 +8,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 3000
-
-CMD ["node", "src/server.js"]
+CMD ["node","src/server.js"]
