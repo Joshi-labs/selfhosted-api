@@ -11,7 +11,7 @@ dotenv.config();
 
 const app = express();
 
-app.set("trust proxy", true);
+app.set("trust proxy", 1); // trust first proxy for correct IP detection
 app.use(express.json());
 app.use(corsMiddleware);
 app.use(rateLimiter);
