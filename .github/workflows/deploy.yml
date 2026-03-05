@@ -1,4 +1,4 @@
-name: Build and Deploy SelfHosted API
+name: Build and Deploy SelfHosted API test
 
 on:
   push:
@@ -59,6 +59,7 @@ jobs:
           - name: k3s
             cluster:
               server: ${K8S_API_URL}
+              insecure-skip-tls-verify: true
           users:
           - name: ci-user
             user:
