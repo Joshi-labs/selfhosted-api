@@ -1,0 +1,12 @@
+@baseUrl = https://selfhosted-api.vpjoshi.in
+
+###
+# Health Check
+GET {{baseUrl}}/health
+Accept: application/json
+
+###
+
+###
+GET {{baseUrl}}/xyz/test
+Accept: application/json
