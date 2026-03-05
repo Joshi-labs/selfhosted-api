@@ -1,4 +1,4 @@
-name: Build and Deploy SelfHosted API Test
+name: Build and Deploy SelfHosted API
 
 on:
   push:
