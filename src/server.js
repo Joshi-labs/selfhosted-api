@@ -11,6 +11,7 @@ dotenv.config();
 
 const app = express();
 
+app.set("trust proxy", true);
 app.use(express.json());
 app.use(corsMiddleware);
 app.use(rateLimiter);
