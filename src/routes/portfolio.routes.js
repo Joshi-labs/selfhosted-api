@@ -41,8 +41,6 @@ router.post("/email", emailLock, async (req, res) => {
       });
     }
 
-    // store sender IP for 24h
-    markEmailSent(req.senderIP);
 
     return res.json({
       code: 200,
