@@ -15,7 +15,7 @@ const app = express();
 
 app.set("trust proxy", ["loopback", "linklocal", "uniquelocal"]);
 app.use(express.json());
-app.use(corsMiddleware);
+app.options('*', corsMiddleware);
 app.use(rateLimiter);
 
 app.use("/portfolio", portfolioRoutes);

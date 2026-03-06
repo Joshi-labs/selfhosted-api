@@ -6,13 +6,10 @@ const allowedOrigins = [
 ];
 
 const corsMiddleware = cors({
-  origin: function (origin, callback) {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("CORS blocked"));
-    }
-  }
+  origin: allowedOrigins, 
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"], 
+  optionsSuccessStatus: 200 
 });
 
 export default corsMiddleware;
