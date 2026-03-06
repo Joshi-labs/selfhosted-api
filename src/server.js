@@ -1,8 +1,3 @@
-import dns from "dns";
-
-dns.setServers(["1.1.1.1","8.8.8.8"]);
-dns.setDefaultResultOrder("ipv4first");
-
 import express from "express";
 import corsMiddleware from "./middleware/cors.js";
 import rateLimiter from "./middleware/rateLimiter.js";

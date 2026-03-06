@@ -10,3 +10,21 @@ Accept: application/json
 ###
 GET {{baseUrl}}/xyz/test
 Accept: application/json
+
+
+###
+
+@baseUrl = https://selfhosted-api.vpjoshi.in
+
+###
+
+POST {{baseUrl}}/portfolio/email
+Content-Type: application/json
+
+{
+"firstName": "Test",
+"lastName": "User",
+"email": "[test@example.com](mailto:test@example.com)",
+"phone": "1234567890",
+"message": "Hello VP Joshi, this is a REST test message from VS Code."
+}
