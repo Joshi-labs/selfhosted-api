@@ -5,6 +5,9 @@ const rateLimiter = rateLimit({
   max: 10,        // 10 requests
   standardHeaders: true,
   legacyHeaders: false,
+  keyGenerator: (req, res) => {
+    return req.headers["cf-connecting-ip"] || req.ip;
+  },
   message: {
     code: 429,
     success: false,
