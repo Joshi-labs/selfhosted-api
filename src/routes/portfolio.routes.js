@@ -13,10 +13,11 @@ const LIMITS = {
   message: 2000
 };
 
+const EMAIL_HARD_LIMIT = 100;
+let emailCounter = 0;
+
 function validateEmailBody({ firstName, lastName, email, phone, message }) {
-  if (!firstName || !email || !message) {
-    return "Missing required fields";
-  }
+  if (!firstName || !email || !message) return "Missing required fields";
   if (firstName.length > LIMITS.firstName) return "First name too long";
   if (lastName && lastName.length > LIMITS.lastName) return "Last name too long";
   if (email.length > LIMITS.email || !EMAIL_REGEX.test(email)) return "Invalid email address";
@@ -37,6 +38,17 @@ router.post("/email", emailLock, async (req, res) => {
     });
   }
 
+  if (emailCounter >= EMAIL_HARD_LIMIT) {
+    return res.status(503).json({
+      code: 503,
+      success: false,
+      message: "Contact form is temporarily unavailable. Please reach out directly."
+    });
+  }
+
+  emailCounter += 1;
+  const currentCount = emailCounter;
+
   try {
     const response = await fetch(process.env.MAIL_API_URL, {
       method: "POST",
@@ -49,12 +61,13 @@ router.post("/email", emailLock, async (req, res) => {
         templateData: {
           fromName: `${firstName} ${lastName || ""}`.trim(),
           fromEmail: email,
-          message: `Phone: ${phone || "Not provided"}\n\n${message}`
+          message: `📬 Message #${currentCount} of ${EMAIL_HARD_LIMIT}\n\nPhone: ${phone || "Not provided"}\n\n${message}`
         }
       })
     });
 
     if (!response.ok) {
+      emailCounter -= 1; // roll back on failure
       return res.status(500).json({
         code: 500,
         success: false,
@@ -69,6 +82,7 @@ router.post("/email", emailLock, async (req, res) => {
     });
 
   } catch (error) {
+    emailCounter -= 1; // roll back on failure
     console.error("Email proxy error:", error);
     return res.status(500).json({
       code: 500,
