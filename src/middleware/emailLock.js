@@ -4,13 +4,11 @@ const EMAIL_COOLDOWN = 6 * 60 * 60 * 1000; // 6 hours
 
 const emailLock = rateLimit({
   windowMs: EMAIL_COOLDOWN,
-  max: 1, // Limit each IP to 1 request per windowMs
+  max: 1, 
   standardHeaders: true,
   legacyHeaders: false,
-  // Explicitly grab the Cloudflare IP
-keyGenerator: (req, res) => {
-    // Strictly rely on proxy headers to satisfy the rate-limiter validation
-    return req.headers["cf-connecting-ip"] || req.headers["x-forwarded-for"] || "unknown";
+  keyGenerator: (req) => {
+    return req.headers["cf-connecting-ip"] || "unknown-ip";
   },
   message: {
     code: 429,

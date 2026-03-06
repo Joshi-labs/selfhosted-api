@@ -5,9 +5,9 @@ const rateLimiter = rateLimit({
   max: 10,        // 10 requests
   standardHeaders: true,
   legacyHeaders: false,
-keyGenerator: (req, res) => {
-    // Strictly rely on proxy headers to satisfy the rate-limiter validation
-    return req.headers["cf-connecting-ip"] || req.headers["x-forwarded-for"] || "unknown";
+  keyGenerator: (req) => {
+    // Force it to use CF IP or a fallback string. 
+    return req.headers["cf-connecting-ip"] || "unknown-ip";
   },
   message: {
     code: 429,
