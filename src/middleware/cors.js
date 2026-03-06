@@ -8,7 +8,7 @@ const allowedOrigins = [
 const corsMiddleware = cors({
   origin: allowedOrigins,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  optionsSuccessStatus: 204 // The standard success status for preflight
+  optionsSuccessStatus: 204 
 });
 
 export default corsMiddleware;
