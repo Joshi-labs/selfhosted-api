@@ -1,5 +1,5 @@
 import express from "express";
-import emailLock, { markEmailSent } from "../middleware/emailLock.js";
+import emailLock from "../middleware/emailLock.js";
 
 const router = express.Router();
 
